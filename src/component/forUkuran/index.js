@@ -27,6 +27,7 @@ export default class ForUkuran extends Component {
             tinggi3: 0,
             tinggi4: 0,
             tinggi5: 0,
+            Umur: 30 //#hari
         }
     }
     componentDidMount() {
@@ -40,6 +41,7 @@ export default class ForUkuran extends Component {
         this.Diameter3();
         this.Diameter4();
         this.Diameter5();
+        this.fungAHP();
         // database()
         // .ref('/Hasil_Pembacaan/Tanaman1/Diameter1')
         // .on('value', snapshot => {
@@ -163,37 +165,70 @@ export default class ForUkuran extends Component {
     fungAHP = () => {
         const ahpContext = new AHP();
 
-        ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
+ahpContext.addItems(['VendorA', 'VendorB', 'VendorC']);
 
-        ahpContext.addCriteria(['Tinggi', 'Diameter', 'Umur']);
+ahpContext.addCriteria(['price', 'functionality', 'UX']);
 
-        //rank criteria with rank scale
-        ahpContext.rankCriteriaItem('Tinggi', [
-            ['VendorB', 'VendorC', 1 / 2],
-            ['VendorA', 'VendorC', 1 / 2],
-            ['VendorA', 'VendorB', 1]
-        ]);
+//rank criteria with rank scale
+ahpContext.rankCriteriaItem('price', [
+    ['VendorB', 'VendorC', 1 / 2],
+    ['VendorA', 'VendorC', 1 / 2],
+    ['VendorA', 'VendorB', 1]
+]);
 
-        //rank criteria with rank scale
-        ahpContext.rankCriteriaItem('Diameter', [
-            ['VendorB', 'VendorC', 1],
-            ['VendorA', 'VendorC', 5],
-            ['VendorA', 'VendorB', 5]
-        ]);
+//rank criteria with rank scale
+ahpContext.rankCriteriaItem('functionality', [
+    ['VendorB', 'VendorC', 1],
+    ['VendorA', 'VendorC', 5],
+    ['VendorA', 'VendorB', 5]
+]);
 
-        //rank criteria with absolute rank scole
-        ahpContext.setCriteriaItemRankByGivenScores('Umur', [10, 10, 1]);
+//rank criteria with absolute rank scole
+ahpContext.setCriteriaItemRankByGivenScores('UX', [10, 10, 1]);
 
-        ahpContext.rankCriteria(
-            [
-                ['price', 'functionality', 3],
-                ['price', 'UX', 3],
-                ['functionality', 'UX', 1]
-            ]
-        );
+ahpContext.rankCriteria(
+    [
+        ['price', 'functionality', 3],
+        ['price', 'UX', 3],
+        ['functionality', 'UX', 1]
+    ]
+);
 
 const output = ahpContext.run();
 console.log(output);
+        // const ahpContext = new AHP();
+
+        // ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
+
+        // ahpContext.addCriteria(['Tinggi', 'Diameter', 'Umur']);
+
+        // //rank criteria with rank scale
+        // ahpContext.rankCriteriaItem('Tinggi', [
+        //     ['Tanaman2', 'Tanaman3', this.state.tinggi1 * 0,106156],
+        //     ['Tanaman1', 'Tanaman3', this.state.tinggi2 * 0,106156],
+        //     ['Tanaman1', 'Tanaman2', this.state.tinggi3 * 0,106156]
+        // ]);
+
+        // //rank criteria with rank scale
+        // ahpContext.rankCriteriaItem('Diameter', [
+        //     ['Tanaman2', 'Tanaman3', this.state.diameter1 * 0,260498],
+        //     ['Tanaman1', 'Tanaman3', this.state.diameter2 * 0,260498],
+        //     ['Tanaman1', 'Tanaman2', this.state.diameter3 * 0,260498]
+        // ]);
+
+        // //rank criteria with absolute rank scole
+        // ahpContext.setCriteriaItemRankByGivenScores('Umur', [10, 10, 1]);
+
+        // ahpContext.rankCriteria(
+        //     [
+        //         ['Tinggi', 'Diameter', 3],
+        //         ['Tinggi', 'Umur', 3],
+        //         ['Diameter', 'Umur', 1]
+        //     ]
+        // );
+
+        // const output = ahpContext.run();
+        // console.log(output);
     }
   render() {
     return (
@@ -227,8 +262,8 @@ console.log(output);
                     <Text style={{fontWeight:'bold', alignItems:'flex-start'}}>Data Tanaman 5</Text>
                     <Text>Diameter : {this.state.diameter5}</Text>
                     <Text>Tinggi : {this.state.tinggi5}</Text>
-                    
                 </View>
+                
             </View>
             <View style={{alignItems:'center', marginTop:moderateScale(100)}}>
                 <Text style={{fontWeight:'bold', fontSize:15}}>Rahmat Setiawan - 118140097</Text>
