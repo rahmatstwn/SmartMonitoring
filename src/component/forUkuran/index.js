@@ -2,15 +2,6 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
 import React, { Component } from 'react'
 import database from '@react-native-firebase/database'
-// import Tinggi1 from './Tinggi1'
-// import Diameter2 from './Diameter2'
-// import Tinggi2 from './Tinggi2'
-// import Diameter3 from './Diameter3'
-// import Diameter4 from './Diameter4'
-// import Diameter5 from './Diameter5'
-// import Tinggi3 from './Tinggi3'
-// import Tinggi4 from './Tinggi4'
-// import Tinggi5 from './Tinggi5'
 import AHP from 'ahp'
 
 export default class ForUkuran extends Component {
@@ -28,13 +19,15 @@ export default class ForUkuran extends Component {
             tinggi4: 0,
             tinggi5: 0,
             Umur: 30, //#hari
-            data:[2,2],
-            matriks:[],
-            kuadratmatriks:[],
-            eigenVector:[],
-            eigenVectorSebelumnya:[],
-            bSt : 0,
-            totalkuadratMatriks:0.0
+            // data:[2,2],
+            // matriks:[],
+            // kuadratmatriks:[],
+            // eigenVector:[],
+            // eigenVectorSebelumnya:[],
+            // bSt : 0,
+            // totalkuadratMatriks:0.0,
+            // ahp:[],
+            // stat:[]
         }
     }
     componentDidMount() {
@@ -162,67 +155,102 @@ export default class ForUkuran extends Component {
     }
 
     fungAHP = () => {
-        this.state.data[0,0]=this.state.tinggi1;
-        this.state.data[0,1]=this.state.diameter1;
-        this.state.data[0,2]=this.state.Umur;
-        this.state.data[1,0]=this.state.tinggi2;
-        this.state.data[1,1]=this.state.diameter2;
-        this.state.data[1,2]=this.state.Umur;
-        this.state.data[2,0]=this.state.tinggi3;
-        this.state.data[2,1]=this.state.diameter3;
-        this.state.data[2,2]=this.state.Umur;
+        let data = [];
+        data[0,0] = this.state.tinggi1;
+        data[0,1] = this.state.diameter1;
+        data[0,2] = this.state.Umur;
+        data[1,0] = this.state.tinggi2;
+        data[1,1] = this.state.diameter2;
+        data[1,2] = this.state.Umur;
+        data[2,0] = this.state.tinggi3;
+        data[2,1] = this.state.diameter3;
+        data[2,2] = this.state.Umur;
+     
 
         const jumlData = 3;
         const jumlKriteria = 3;
+        let bSt = false;
+        let matriks = [];
+        let kuadratmatriks =[];
+        let totalkuadratMatriks
+        let eigenVector = [];
+        let eigenVectorSebelumnya = [];
 
-        this.state.matriks[(jumlKriteria-1),(jumlKriteria-1)];
-        this.state.kuadratmatriks[(jumlKriteria-1),(jumlKriteria-1)];
-        this.state.eigenVector[jumlKriteria-1];
-        this.state.eigenVectorSebelumnya[jumlKriteria-1];
-
-        while(this.state.bSt != 0){
-            if(this.state.matriks[0,0] = 0){
-                this.state.matriks[0,0]=1;
-                this.state.matriks[0,1]=0.33;
-                this.state.matriks[0,2]=0.33;
-                this.state.matriks[1,0]=3;
-                this.state.matriks[1,1]=1;
-                this.state.matriks[1,2]=0.5;
-                this.state.matriks[2,0]=3;
-                this.state.matriks[2,1]=2;
-                this.state.matriks[2,2]=1;
+        while(bSt != false) {
+            if(matriks[0,0] = 0){
+                matriks[0,0] = 1;
+                matriks[0,1] = 0.33;
+                matriks[0,2] = 0.33;
+                matriks[1,0] = 3;
+                matriks[1,1] = 1;
+                matriks[1,2] = 0.5;
+                matriks[2,0] = 3;
+                matriks[2,1] = 2;
+                matriks[2,2] = 1;
 
             }else{
-                this.state.matriks[0,0]=this.kuadratmatriks[0,0];
-                this.state.matriks[0,1]=this.kuadratmatriks[0,1];
-                this.state.matriks[0,2]=this.kuadratmatriks[0,2];
-                this.state.matriks[1,0]=this.kuadratmatriks[1,0];
-                this.state.matriks[1,1]=this.kuadratmatriks[1,1];
-                this.state.matriks[1,2]=this.kuadratmatriks[1,2];
-                this.state.matriks[2,0]=this.kuadratmatriks[2,0];
-                this.state.matriks[2,1]=this.kuadratmatriks[2,1];
-                this.state.matriks[2,2]=this.kuadratmatriks[2,2];
+                matriks[0,0] = kuadratmatriks[0,0];
+                matriks[0,1] = kuadratmatriks[0,1];
+                matriks[0,2] = kuadratmatriks[0,2];
+                matriks[1,0] = kuadratmatriks[1,0];
+                matriks[1,1] = kuadratmatriks[1,1];
+                matriks[1,2] = kuadratmatriks[1,2];
+                matriks[2,0] = kuadratmatriks[2,0];
+                matriks[2,1] = kuadratmatriks[2,1];
+                matriks[2,2] = kuadratmatriks[2,2];
             }
-            var i;
-            var j;
+            let i,j;
             for(i=0; i<=2; i++){
                 for(j=0; j<=2; j++){
-                    this.state.kuadratmatriks[i,j] = this.state.matriks[0,j] * this.state.matriks[i,0] + this.state.matriks[1,j] * this.state.matriks[i,1] + this.state.matriks[2,j] * this.state.matriks[i,2];
-                    this.state.totalkuadratMatriks += this.state.kuadratmatriks[i,j];
+                    kuadratmatriks[i, j] = (matriks[0, j] * matriks[i, 0]) + (matriks[1, j] * matriks[i, 1]) + (matriks[2, j] * matriks[i, 2])
+                    totalkuadratMatriks += kuadratmatriks[i, j]
                 }
             }
-            this.state.eigenVector[0] = (this.state.kuadratmatriks[0,0] + this.state.kuadratmatriks[0,1] + this.state.kuadratmatriks[0,2]) / this.state.totalkuadratMatriks
-            this.state.eigenVector[1] = (this.state.kuadratmatriks[1,0] + this.state.kuadratmatriks[1,1] + this.state.kuadratmatriks[1,2]) / this.state.totalkuadratMatriks
-            this.state.eigenVector[2] = (this.state.kuadratmatriks[2,0] + this.state.kuadratmatriks[2,1] + this.state.kuadratmatriks[2,2]) / this.state.totalkuadratMatriks
-        
-            if(this.state.eigenVectorSebelumnya[0] == this.state.eigenVector[0] && this.state.eigenVectorSebelumnya[1] == this.state.eigenVector[1] && this.state.eigenVectorSebelumnya[2] == this.state.eigenVector[2]){
-                this.state.bSt = 1;
+            eigenVector[0] = (kuadratmatriks[0, 0] + kuadratmatriks[0, 1] + kuadratmatriks[0, 2]) / totalkuadratMatriks
+            eigenVector[1] = (kuadratmatriks[1, 0] + kuadratmatriks[1, 1] + kuadratmatriks[1, 2]) / totalkuadratMatriks
+            eigenVector[2] = (kuadratmatriks[2, 0] + kuadratmatriks[2, 1] + kuadratmatriks[2, 2]) / totalkuadratMatriks
+
+            if(eigenVectorSebelumnya[0]===eigenVector[0] && eigenVectorSebelumnya[1]===eigenVector[1] && eigenVectorSebelumnya[2]===eigenVector[2]){
+                bSt = true
             }else{
-                this.state.eigenVectorSebelumnya[0] = this.state.eigenVector[0];
-                this.state.eigenVectorSebelumnya[1] = this.state.eigenVector[1];
-                this.state.eigenVectorSebelumnya[2] = this.state.eigenVector[2];
+                eigenVectorSebelumnya[0] = eigenVector[0]
+                eigenVectorSebelumnya[1] = eigenVector[1]
+                eigenVectorSebelumnya[2] = eigenVector[2]
             }
         }
+        
+        const maksUmur = 50;
+        const maksDiameter = 30;
+        const maksTinggi = 20;
+
+        let ahp = [];
+        let stat = [];
+
+        for(i=0; i<=jumlData-1; i++){
+            ahp[i] = (data[i, 0] / maksTinggi * eigenVector[0]) + (data[i, 1] / maksDiameter) * eigenVector[1] + (data[i, 2] / maksUmur) * eigenVector[2]
+            if(ahp[i] < 0.6){
+                stat[i] = "Kurang";
+            }else if(ahp[i] < 0.7){
+                stat[i] = "Cukup"
+            }else if(ahp[i] < 0.8){
+                stat[i] = "Baik"
+            }else{
+                stat[i] = "Sangat Baik"
+            }
+        }
+        console.log("Hasil Akhir")
+        console.log("Tanaman 1" && ahp[0])
+        console.log("Tanaman 2" && ahp[1])
+        console.log("Tanaman 3" && ahp[2])
+
+        console.log("Kesimpulan Akhir")
+        console.log("Tanaman 1" && stat[0])
+        console.log("Tanaman 2" && stat[1])
+        console.log("Tanaman 3" && stat[2])
+
+        
+
+        
         // const ahpContext = new AHP();
 
         // ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
@@ -256,6 +284,7 @@ export default class ForUkuran extends Component {
 
         // const output = ahpContext.run();
         // console.log(output);
+        
     }
   render() {
     return (
