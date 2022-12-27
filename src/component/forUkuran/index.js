@@ -27,7 +27,14 @@ export default class ForUkuran extends Component {
             tinggi3: 0,
             tinggi4: 0,
             tinggi5: 0,
-            Umur: 30 //#hari
+            Umur: 30, //#hari
+            data:[2,2],
+            matriks:[],
+            kuadratmatriks:[],
+            eigenVector:[],
+            eigenVectorSebelumnya:[],
+            bSt : 0,
+            totalkuadratMatriks:0.0
         }
     }
     componentDidMount() {
@@ -42,14 +49,6 @@ export default class ForUkuran extends Component {
         this.Diameter4();
         this.Diameter5();
         this.fungAHP();
-        // database()
-        // .ref('/Hasil_Pembacaan/Tanaman1/Diameter1')
-        // .on('value', snapshot => {
-        
-        // this.setState({
-        //     diameter1 : snapshot.val(),
-        //     })
-        // });
     }
 
     Tinggi1 =()=>{
@@ -163,39 +162,67 @@ export default class ForUkuran extends Component {
     }
 
     fungAHP = () => {
-        const ahpContext = new AHP();
+        this.state.data[0,0]=this.state.tinggi1;
+        this.state.data[0,1]=this.state.diameter1;
+        this.state.data[0,2]=this.state.Umur;
+        this.state.data[1,0]=this.state.tinggi2;
+        this.state.data[1,1]=this.state.diameter2;
+        this.state.data[1,2]=this.state.Umur;
+        this.state.data[2,0]=this.state.tinggi3;
+        this.state.data[2,1]=this.state.diameter3;
+        this.state.data[2,2]=this.state.Umur;
 
-ahpContext.addItems(['VendorA', 'VendorB', 'VendorC']);
+        const jumlData = 3;
+        const jumlKriteria = 3;
 
-ahpContext.addCriteria(['price', 'functionality', 'UX']);
+        this.state.matriks[(jumlKriteria-1),(jumlKriteria-1)];
+        this.state.kuadratmatriks[(jumlKriteria-1),(jumlKriteria-1)];
+        this.state.eigenVector[jumlKriteria-1];
+        this.state.eigenVectorSebelumnya[jumlKriteria-1];
 
-//rank criteria with rank scale
-ahpContext.rankCriteriaItem('price', [
-    ['VendorB', 'VendorC', 1 / 2],
-    ['VendorA', 'VendorC', 1 / 2],
-    ['VendorA', 'VendorB', 1]
-]);
+        while(this.state.bSt != 0){
+            if(this.state.matriks[0,0] = 0){
+                this.state.matriks[0,0]=1;
+                this.state.matriks[0,1]=0.33;
+                this.state.matriks[0,2]=0.33;
+                this.state.matriks[1,0]=3;
+                this.state.matriks[1,1]=1;
+                this.state.matriks[1,2]=0.5;
+                this.state.matriks[2,0]=3;
+                this.state.matriks[2,1]=2;
+                this.state.matriks[2,2]=1;
 
-//rank criteria with rank scale
-ahpContext.rankCriteriaItem('functionality', [
-    ['VendorB', 'VendorC', 1],
-    ['VendorA', 'VendorC', 5],
-    ['VendorA', 'VendorB', 5]
-]);
-
-//rank criteria with absolute rank scole
-ahpContext.setCriteriaItemRankByGivenScores('UX', [10, 10, 1]);
-
-ahpContext.rankCriteria(
-    [
-        ['price', 'functionality', 3],
-        ['price', 'UX', 3],
-        ['functionality', 'UX', 1]
-    ]
-);
-
-const output = ahpContext.run();
-console.log(output);
+            }else{
+                this.state.matriks[0,0]=this.kuadratmatriks[0,0];
+                this.state.matriks[0,1]=this.kuadratmatriks[0,1];
+                this.state.matriks[0,2]=this.kuadratmatriks[0,2];
+                this.state.matriks[1,0]=this.kuadratmatriks[1,0];
+                this.state.matriks[1,1]=this.kuadratmatriks[1,1];
+                this.state.matriks[1,2]=this.kuadratmatriks[1,2];
+                this.state.matriks[2,0]=this.kuadratmatriks[2,0];
+                this.state.matriks[2,1]=this.kuadratmatriks[2,1];
+                this.state.matriks[2,2]=this.kuadratmatriks[2,2];
+            }
+            var i;
+            var j;
+            for(i=0; i<=2; i++){
+                for(j=0; j<=2; j++){
+                    this.state.kuadratmatriks[i,j] = this.state.matriks[0,j] * this.state.matriks[i,0] + this.state.matriks[1,j] * this.state.matriks[i,1] + this.state.matriks[2,j] * this.state.matriks[i,2];
+                    this.state.totalkuadratMatriks += this.state.kuadratmatriks[i,j];
+                }
+            }
+            this.state.eigenVector[0] = (this.state.kuadratmatriks[0,0] + this.state.kuadratmatriks[0,1] + this.state.kuadratmatriks[0,2]) / this.state.totalkuadratMatriks
+            this.state.eigenVector[1] = (this.state.kuadratmatriks[1,0] + this.state.kuadratmatriks[1,1] + this.state.kuadratmatriks[1,2]) / this.state.totalkuadratMatriks
+            this.state.eigenVector[2] = (this.state.kuadratmatriks[2,0] + this.state.kuadratmatriks[2,1] + this.state.kuadratmatriks[2,2]) / this.state.totalkuadratMatriks
+        
+            if(this.state.eigenVectorSebelumnya[0] == this.state.eigenVector[0] && this.state.eigenVectorSebelumnya[1] == this.state.eigenVector[1] && this.state.eigenVectorSebelumnya[2] == this.state.eigenVector[2]){
+                this.state.bSt = 1;
+            }else{
+                this.state.eigenVectorSebelumnya[0] = this.state.eigenVector[0];
+                this.state.eigenVectorSebelumnya[1] = this.state.eigenVector[1];
+                this.state.eigenVectorSebelumnya[2] = this.state.eigenVector[2];
+            }
+        }
         // const ahpContext = new AHP();
 
         // ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
@@ -204,24 +231,24 @@ console.log(output);
 
         // //rank criteria with rank scale
         // ahpContext.rankCriteriaItem('Tinggi', [
-        //     ['Tanaman2', 'Tanaman3', this.state.tinggi1 * 0,106156],
-        //     ['Tanaman1', 'Tanaman3', this.state.tinggi2 * 0,106156],
-        //     ['Tanaman1', 'Tanaman2', this.state.tinggi3 * 0,106156]
+        //     ['Tanaman2', 'Tanaman3', 1.665],//this.state.tinggi1 * 0.111],
+        //     ['Tanaman1', 'Tanaman3', 1.887],//this.state.tinggi2 * 0.111],
+        //     ['Tanaman1', 'Tanaman2', 1.887]//this.state.tinggi3 * 0.111]
         // ]);
 
         // //rank criteria with rank scale
         // ahpContext.rankCriteriaItem('Diameter', [
-        //     ['Tanaman2', 'Tanaman3', this.state.diameter1 * 0,260498],
-        //     ['Tanaman1', 'Tanaman3', this.state.diameter2 * 0,260498],
-        //     ['Tanaman1', 'Tanaman2', this.state.diameter3 * 0,260498]
+        //     ['Tanaman2', 'Tanaman3', 5.994],//this.state.diameter1 * 0.333],
+        //     ['Tanaman1', 'Tanaman3', 6.66],//this.state.diameter2 * 0.333],
+        //     ['Tanaman1', 'Tanaman2', 8.325]//this.state.diameter3 * 0.333]
         // ]);
 
         // //rank criteria with absolute rank scole
-        // ahpContext.setCriteriaItemRankByGivenScores('Umur', [10, 10, 1]);
+        // ahpContext.setCriteriaItemRankByGivenScores('Umur', [16.68, 16.68, 16.68]);
 
         // ahpContext.rankCriteria(
         //     [
-        //         ['Tinggi', 'Diameter', 3],
+        //         ['Tinggi', 'Diameter', 5],
         //         ['Tinggi', 'Umur', 3],
         //         ['Diameter', 'Umur', 1]
         //     ]
