@@ -155,20 +155,37 @@ export default class ForUkuran extends Component {
     }
 
     fungAHP = () => {
-        let data = [];
-        data[0,0] = this.state.tinggi1;
-        data[0,1] = this.state.diameter1;
-        data[0,2] = this.state.Umur;
-        data[1,0] = this.state.tinggi2;
-        data[1,1] = this.state.diameter2;
-        data[1,2] = this.state.Umur;
-        data[2,0] = this.state.tinggi3;
-        data[2,1] = this.state.diameter3;
-        data[2,2] = this.state.Umur;
-     
-
         const jumlData = 3;
         const jumlKriteria = 3;
+        let data = [];
+        let i,j;
+
+        for(i=0; i<jumlKriteria; i++){
+            data[i] = [];
+            for(j=0; j<jumlKriteria; j++){
+                data[i][j] = null;
+            }
+        }
+
+        data[0][0] = this.state.tinggi1;
+        data[0][1] = this.state.diameter1;
+        data[0][2] = this.state.Umur;
+        data[1][0] = this.state.tinggi2;
+        data[1][1] = this.state.diameter2;
+        data[1][2] = this.state.Umur;
+        data[2][0] = this.state.tinggi3;
+        data[2][1] = this.state.diameter3;
+        data[2][2] = this.state.Umur;
+
+        for(i=0; i<jumlKriteria-1; i++){
+            for(j=0; j<jumlKriteria-1; j++){
+                data[i][j]
+            }
+        }
+
+        console.log(data);
+     
+ 
         let bSt = false;
         let matriks = [];
         let kuadratmatriks =[];
@@ -177,38 +194,46 @@ export default class ForUkuran extends Component {
         let eigenVectorSebelumnya = [];
 
         while(bSt != false) {
-            if(matriks[0,0] = 0){
-                matriks[0,0] = 1;
-                matriks[0,1] = 0.33;
-                matriks[0,2] = 0.33;
-                matriks[1,0] = 3;
-                matriks[1,1] = 1;
-                matriks[1,2] = 0.5;
-                matriks[2,0] = 3;
-                matriks[2,1] = 2;
-                matriks[2,2] = 1;
-
-            }else{
-                matriks[0,0] = kuadratmatriks[0,0];
-                matriks[0,1] = kuadratmatriks[0,1];
-                matriks[0,2] = kuadratmatriks[0,2];
-                matriks[1,0] = kuadratmatriks[1,0];
-                matriks[1,1] = kuadratmatriks[1,1];
-                matriks[1,2] = kuadratmatriks[1,2];
-                matriks[2,0] = kuadratmatriks[2,0];
-                matriks[2,1] = kuadratmatriks[2,1];
-                matriks[2,2] = kuadratmatriks[2,2];
-            }
-            let i,j;
-            for(i=0; i<=2; i++){
-                for(j=0; j<=2; j++){
-                    kuadratmatriks[i, j] = (matriks[0, j] * matriks[i, 0]) + (matriks[1, j] * matriks[i, 1]) + (matriks[2, j] * matriks[i, 2])
-                    totalkuadratMatriks += kuadratmatriks[i, j]
+            for(i=0; i<jumlKriteria; i++){
+                matriks[i] = [];
+                kuadratmatriks[i] = [];
+                for(j=0; j<jumlKriteria; j++){
+                    matriks[i][j] = null;
+                    kuadratmatriks[i][j] = null;
                 }
             }
-            eigenVector[0] = (kuadratmatriks[0, 0] + kuadratmatriks[0, 1] + kuadratmatriks[0, 2]) / totalkuadratMatriks
-            eigenVector[1] = (kuadratmatriks[1, 0] + kuadratmatriks[1, 1] + kuadratmatriks[1, 2]) / totalkuadratMatriks
-            eigenVector[2] = (kuadratmatriks[2, 0] + kuadratmatriks[2, 1] + kuadratmatriks[2, 2]) / totalkuadratMatriks
+            if(matriks[0][0] = 0){
+                matriks[0][0] = 1;
+                matriks[0][1] = 0.33;
+                matriks[0][2] = 0.33;
+                matriks[1][0] = 3;
+                matriks[1][1] = 1;
+                matriks[1][2] = 0.5;
+                matriks[2][0] = 3;
+                matriks[2][1] = 2;
+                matriks[2][2] = 1;
+
+            }else{
+                matriks[0][0] = kuadratmatriks[0][0];
+                matriks[0][1] = kuadratmatriks[0][1];
+                matriks[0][2] = kuadratmatriks[0][2];
+                matriks[1][0] = kuadratmatriks[1][0];
+                matriks[1][1] = kuadratmatriks[1][1];
+                matriks[1][2] = kuadratmatriks[1][2];
+                matriks[2][0] = kuadratmatriks[2][0];
+                matriks[2][1] = kuadratmatriks[2][1];
+                matriks[2][2] = kuadratmatriks[2][2];
+            }
+            
+            for(i=0; i<=2; i++){
+                for(j=0; j<=2; j++){
+                    kuadratmatriks[i][j] = (matriks[0, j] * matriks[i, 0]) + (matriks[1, j] * matriks[i, 1]) + (matriks[2, j] * matriks[i, 2]);
+                    totalkuadratMatriks += kuadratmatriks[i][j];
+                }
+            }
+            eigenVector[0] = (kuadratmatriks[0][0] + kuadratmatriks[0][1] + kuadratmatriks[0][2]) / totalkuadratMatriks
+            eigenVector[1] = (kuadratmatriks[1][0] + kuadratmatriks[1][1] + kuadratmatriks[1][2]) / totalkuadratMatriks
+            eigenVector[2] = (kuadratmatriks[2][0] + kuadratmatriks[2][1] + kuadratmatriks[2][2]) / totalkuadratMatriks
 
             if(eigenVectorSebelumnya[0]===eigenVector[0] && eigenVectorSebelumnya[1]===eigenVector[1] && eigenVectorSebelumnya[2]===eigenVector[2]){
                 bSt = true
@@ -251,39 +276,39 @@ export default class ForUkuran extends Component {
         
 
         
-        // const ahpContext = new AHP();
+        // // const ahpContext = new AHP();
 
-        // ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
+        // // ahpContext.addItems(['Tanaman1', 'Tanaman2', 'Tanaman3']);
 
-        // ahpContext.addCriteria(['Tinggi', 'Diameter', 'Umur']);
+        // // ahpContext.addCriteria(['Tinggi', 'Diameter', 'Umur']);
 
-        // //rank criteria with rank scale
-        // ahpContext.rankCriteriaItem('Tinggi', [
-        //     ['Tanaman2', 'Tanaman3', 1.665],//this.state.tinggi1 * 0.111],
-        //     ['Tanaman1', 'Tanaman3', 1.887],//this.state.tinggi2 * 0.111],
-        //     ['Tanaman1', 'Tanaman2', 1.887]//this.state.tinggi3 * 0.111]
-        // ]);
+        // // //rank criteria with rank scale
+        // // ahpContext.rankCriteriaItem('Tinggi', [
+        // //     ['Tanaman2', 'Tanaman3', 1.665],//this.state.tinggi1 * 0.111],
+        // //     ['Tanaman1', 'Tanaman3', 1.887],//this.state.tinggi2 * 0.111],
+        // //     ['Tanaman1', 'Tanaman2', 1.887]//this.state.tinggi3 * 0.111]
+        // // ]);
 
-        // //rank criteria with rank scale
-        // ahpContext.rankCriteriaItem('Diameter', [
-        //     ['Tanaman2', 'Tanaman3', 5.994],//this.state.diameter1 * 0.333],
-        //     ['Tanaman1', 'Tanaman3', 6.66],//this.state.diameter2 * 0.333],
-        //     ['Tanaman1', 'Tanaman2', 8.325]//this.state.diameter3 * 0.333]
-        // ]);
+        // // //rank criteria with rank scale
+        // // ahpContext.rankCriteriaItem('Diameter', [
+        // //     ['Tanaman2', 'Tanaman3', 5.994],//this.state.diameter1 * 0.333],
+        // //     ['Tanaman1', 'Tanaman3', 6.66],//this.state.diameter2 * 0.333],
+        // //     ['Tanaman1', 'Tanaman2', 8.325]//this.state.diameter3 * 0.333]
+        // // ]);
 
-        // //rank criteria with absolute rank scole
-        // ahpContext.setCriteriaItemRankByGivenScores('Umur', [16.68, 16.68, 16.68]);
+        // // //rank criteria with absolute rank scole
+        // // ahpContext.setCriteriaItemRankByGivenScores('Umur', [16.68, 16.68, 16.68]);
 
-        // ahpContext.rankCriteria(
-        //     [
-        //         ['Tinggi', 'Diameter', 5],
-        //         ['Tinggi', 'Umur', 3],
-        //         ['Diameter', 'Umur', 1]
-        //     ]
-        // );
+        // // ahpContext.rankCriteria(
+        // //     [
+        // //         ['Tinggi', 'Diameter', 5],
+        // //         ['Tinggi', 'Umur', 3],
+        // //         ['Diameter', 'Umur', 1]
+        // //     ]
+        // // );
 
-        // const output = ahpContext.run();
-        // console.log(output);
+        // // const output = ahpContext.run();
+        // // console.log(output);
         
     }
   render() {
