@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { moderateScale } from 'react-native-size-matters'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Icon from 'react-native-vector-icons/EvilIcons'
-
 
 const ForHome = props => {
     const navigation = useNavigation();

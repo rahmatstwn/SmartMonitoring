@@ -170,11 +170,9 @@ export default class ForUkuran extends Component {
         let eigenVectorSebelumnya = [];
         let data = [];
         let i, j;
-        let tanaman = [];
 
         for (i = 0; i < jumlData; i++) {
             data[i] = [];
-            tanaman[i] = "Tanaman ke" + (i+1) ;
             for (j = 0; j < jumlKriteria; j++) {
                 data[i][j] = null;
             }
@@ -287,32 +285,25 @@ export default class ForUkuran extends Component {
                 stat[i] = "Sangat Baik"
             }
         }
-        console.log("Hasil Akhir")
-        console.log("Tanaman 1" && ahp[0])
-        console.log("Tanaman 2" && ahp[1])
-        console.log("Tanaman 3" && ahp[2])
-        console.log("Tanaman 2" && ahp[3])
-        console.log("Tanaman 3" && ahp[4])
 
-        console.log("Kesimpulan Akhir")
-        console.log("Tanaman 1" && stat[0])
-        console.log("Tanaman 2" && stat[1])
-        console.log("Tanaman 3" && stat[2])
-        console.log("Tanaman 2" && stat[3])
-        console.log("Tanaman 3" && stat[4])
+        const tanaman = [{ahp : ahp[0], nama : "Tanaman 1"}, {ahp : ahp[1], nama : "Tanaman 2" }, {ahp : ahp[2], nama : "Tanaman 3"}, {ahp : ahp[3], nama : "Tanaman 4"}, {ahp : ahp[4], nama : "Tanaman 5"}];
+        tanaman.sort((a,b) => b.ahp - a.ahp);
 
-        let temp;
-        for(i=0; i<jumlData; i++){
-            for(j=0; j<jumlData; j++){
-                if(ahp[i] > ahp[j]){
-                    temp = ahp[i];
-                    ahp[i] = ahp[j];
-                    ahp[j] = temp;
-                }
-            }
-        }
+        console.log(tanaman)
 
+        // console.log("Hasil Akhir")
+        // console.log("Tanaman 1" && ahp[0])
+        // console.log("Tanaman 2" && ahp[1])
+        // console.log("Tanaman 3" && ahp[2])
+        // console.log("Tanaman 2" && ahp[3])
+        // console.log("Tanaman 3" && ahp[4])
 
+        // console.log("Kesimpulan Akhir")
+        // console.log("Tanaman 1" && stat[0])
+        // console.log("Tanaman 2" && stat[1])
+        // console.log("Tanaman 3" && stat[2])
+        // console.log("Tanaman 2" && stat[3])
+        // console.log("Tanaman 3" && stat[4])
     }
     render() {
         return (
