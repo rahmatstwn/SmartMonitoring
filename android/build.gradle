@@ -6,6 +6,11 @@ buildscript {
         minSdkVersion = 21
         compileSdkVersion = 31
         targetSdkVersion = 31
+        // supportLibVersion = "29.0.0"
+        // playServicesVersion = "17.0.0"
+        // googlePlayServicesVersion = "+" // default: “+”
+        // firebaseMessagingVersion = "^17.0.0"
+        // firebaseVersion = "^17.0.0"
 
         if (System.properties['os.arch'] == "aarch64") {
             // For M1 Users we need to use the NDK 24 which added support for aarch64
