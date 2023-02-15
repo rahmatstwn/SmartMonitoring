@@ -4,8 +4,9 @@ import { useNavigation } from '@react-navigation/native'
 import { moderateScale } from 'react-native-size-matters'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
-const ForHome = props => {
+const ForHome = () => {
     const navigation = useNavigation();
+
 
     return (
         <View style = {{alignItems:'center'}}>
