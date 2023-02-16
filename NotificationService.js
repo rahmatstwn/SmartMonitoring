@@ -1,14 +1,17 @@
 import PushNotification, {Importance} from 'react-native-push-notification';
 import NotificationHandler from './NotificationHandler';
 import database from '@react-native-firebase/database';
-import { useEffect } from 'react';
+import { useEffect, Component, useState } from 'react';
+
 
 export default class NotifService {
-  constructor(onRegister, onNotification, props) {
+  constructor(onRegister, onNotification) {
     // super(props);
     this.lastId = 0;
     this.lastChannelCounter = 0;
     this.state = {
+        // lastId:0,
+        // lastChannelCounter:0,
         suhu: 0,
         PH: 0,
         TDS: 0,
@@ -26,6 +29,8 @@ export default class NotifService {
     }
 
     this.createDefaultChannels();
+
+    // const[onRegister, onNotification] = useState();
 
     NotificationHandler.attachRegister(onRegister);
     NotificationHandler.attachNotification(onNotification);
@@ -60,19 +65,18 @@ export default class NotifService {
             await this.Diameter3();
             await this.Diameter4();
             await this.Diameter5();
-        } catch (error) {
-
-        }
-
-
-    }
-    componentDidUpdate() {
-        console.log("masuk update")
-        if (this.state.diameter1 != 0 && this.state.diameter2 != 0 && this.state.diameter3 != 0 && this.state.diameter4 != 0 && this.state.diameter5 != 0) {
-            console.log("data")
+        } 
+            catch (error) {
         }
 
     }
+    // componentDidUpdate() {
+    //     console.log("masuk update")
+    //     if (this.state.diameter1 != 0 && this.state.diameter2 != 0 && this.state.diameter3 != 0 && this.state.diameter4 != 0 && this.state.diameter5 != 0) {
+    //         console.log("data")
+    //     }
+
+    // }
 
     async Suhu() {
 
@@ -266,8 +270,11 @@ export default class NotifService {
   }
 
   localNotif(soundName) {
+    this.componentDidMount();
+    this.Suhu();
+    this.TDS();
         console.log(this.state.suhu);
-
+        console.log(this.state.TDS);
         this.lastId++;
         PushNotification.localNotification({
         /* Android Only Properties */
