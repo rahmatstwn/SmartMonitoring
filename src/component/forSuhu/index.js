@@ -24,10 +24,10 @@ export default class ForSuhu extends Component {
     return (
         <SafeAreaView>
             <View style = {styles.kotak}>
-                <Text>{this.state.suhu} Celcius</Text>
-                {this.state.suhu >=28 && <Text>Panas</Text>}
-                {this.state.suhu <27 && <Text>Dingin</Text>}
-                {this.state.suhu ==27 && <Text>Standar</Text>}
+                <Text style={{color:'black'}}>{this.state.suhu} Celcius</Text>
+                {this.state.suhu >=28 && <Text style={{color:'black'}}>Panas</Text>}
+                {this.state.suhu <27 && <Text style={{color:'black'}}>Dingin</Text>}
+                {this.state.suhu ==27 && <Text style={{color:'black'}}>Standar</Text>}
             </View>
             <View style={{alignItems:'center', marginTop:moderateScale(300)}}>
                 <Text style={{fontWeight:'bold', fontSize:15}}>Rahmat Setiawan - 118140097</Text>

@@ -6,7 +6,7 @@ import ForSuhu from '../component/forSuhu'
 const HalSuhu = () => {
   return (
     <SafeAreaView style={{alignItems:'center', marginVertical:moderateScale(150), marginHorizontal:moderateScale(15)}}>
-      <Text>Kondisi Ruangan Hidroponik</Text>
+      <Text style={{color:'black',fontWeight:'bold'}}>Kondisi Ruangan Hidroponik</Text>
       <ForSuhu/>
     </SafeAreaView>
   )

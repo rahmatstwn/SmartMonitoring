@@ -6,7 +6,7 @@ import ForTDS from '../component/forTDS'
 const HalTDS = () => {
   return (
     <SafeAreaView style={{alignItems:'center', marginVertical:moderateScale(150), marginHorizontal:moderateScale(15)}}>
-      <Text>Kadar Nutrisi Air Hidroponik</Text>
+      <Text style={{color:'black',fontWeight:'bold'}}>Kadar Nutrisi Air Hidroponik</Text>
       <ForTDS/>
     </SafeAreaView>
   )

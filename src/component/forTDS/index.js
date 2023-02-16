@@ -24,10 +24,10 @@ export default class ForTDS extends Component {
     return (
         <SafeAreaView>
             <View style = {styles.kotak}>
-                <Text>{this.state.TDS}</Text>
+                <Text style={{color:'black'}}>{this.state.TDS} PPM</Text>
             </View>
             <View style={{alignItems:'center', marginTop:moderateScale(300)}}>
-                <Text style={{fontWeight:'bold', fontSize:15}}>Rahmat Setiawan - 118140097</Text>
+                <Text style={{fontWeight:'bold', fontSize:15, color:'black'}}>Rahmat Setiawan - 118140097</Text>
             </View>
         </SafeAreaView>
       )

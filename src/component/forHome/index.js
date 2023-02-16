@@ -15,23 +15,26 @@ const ForHome = () => {
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={styles.menu} onPress={() => navigation.navigate('HalSuhu')}>
                         <FontAwesome5 name={'temperature-high'} size={60} color={'black'} />
-                        <Text>Kondisi Ruangan</Text>
+                        <Text style={{color:'black'}}>Kondisi Ruangan</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menu} onPress={() => navigation.navigate('HalPH')} >
                         <FontAwesome5 name={'flask'} size={60} color={'black'}/>
-                        <Text>pH Air</Text>
+                        <Text style={{color:'black'}}>pH Air</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity style={styles.menu} onPress={() => navigation.navigate('HalTDS')}>
                         <FontAwesome5 name={'water'} size={60} color={'black'}/>
-                        <Text>Kadar Nutrisi Air</Text>
+                        <Text style={{color:'black'}}>Kadar Nutrisi Air</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menu} onPress={() => navigation.navigate('HalUkuran')}>
                         <FontAwesome5 name={'seedling'} size={60} color={'black'}/>
-                        <Text>Ukuran Tanaman</Text>
+                        <Text style={{color:'black'}}>Ukuran Tanaman</Text>
                     </TouchableOpacity>
                 </View>
+            </View>
+            <View style={{alignItems:'center', marginTop:moderateScale(320)}}>
+                <Text style={{fontWeight:'bold', fontSize:15, color:'black'}}>Rahmat Setiawan - 118140097</Text>
             </View>
         </View>
     )

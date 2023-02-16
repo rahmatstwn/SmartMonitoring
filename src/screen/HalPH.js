@@ -6,7 +6,7 @@ import ForPH from '../component/forPH'
 const HalPH = () => {
   return (
     <SafeAreaView style={{alignItems:'center', marginVertical:moderateScale(150), marginHorizontal:moderateScale(15)}}>
-      <Text>Kondisi PH Air Hidroponik</Text>
+      <Text style={{color:'black',fontWeight:'bold'}}>Kondisi PH Air Hidroponik</Text>
       <ForPH/>
     </SafeAreaView>
   )

@@ -311,37 +311,37 @@ export default class ForUkuran extends Component {
                 <View style={styles.kotak}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', marginHorizontal: moderateScale(30) }}>
-                            <Text style={{ fontWeight: 'bold' }}>Data Tanaman 1</Text>
-                            <Text>Diameter : {this.state.diameter1}</Text>
-                            <Text>Tinggi : {this.state.tinggi1}</Text>
+                            <Text style={{ fontWeight: 'bold', color:'black' }}>Data Tanaman 1</Text>
+                            <Text style={{color:'black'}}>Diameter : {this.state.diameter1}</Text>
+                            <Text style={{color:'black'}}>Tinggi : {this.state.tinggi1}</Text>
                         </View>
                         <View style={{ flexDirection: 'column', marginHorizontal: moderateScale(30) }}>
-                            <Text style={{ fontWeight: 'bold' }}>Data Tanaman 2</Text>
-                            <Text>Diameter : {this.state.diameter2}</Text>
-                            <Text>Tinggi : {this.state.tinggi2}</Text>
+                            <Text style={{ fontWeight: 'bold', color:'black' }}>Data Tanaman 2</Text>
+                            <Text style={{color:'black'}}>Diameter : {this.state.diameter2}</Text>
+                            <Text style={{color:'black'}}>Tinggi : {this.state.tinggi2}</Text>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', marginVertical: moderateScale(30) }}>
                         <View style={{ flexDirection: 'column', marginHorizontal: moderateScale(30) }}>
-                            <Text style={{ fontWeight: 'bold' }}>Data Tanaman 3</Text>
-                            <Text>Diameter : {this.state.diameter3}</Text>
-                            <Text>Tinggi : {this.state.tinggi3}</Text>
+                            <Text style={{ fontWeight: 'bold', color:'black' }}>Data Tanaman 3</Text>
+                            <Text style={{color:'black'}}>Diameter : {this.state.diameter3}</Text>
+                            <Text style={{color:'black'}}>Tinggi : {this.state.tinggi3}</Text>
                         </View>
                         <View style={{ flexDirection: 'column', marginHorizontal: moderateScale(30) }}>
-                            <Text style={{ fontWeight: 'bold' }}>Data Tanaman 4</Text>
-                            <Text>Diameter : {this.state.diameter4}</Text>
-                            <Text>Tinggi : {this.state.tinggi4}</Text>
+                            <Text style={{ fontWeight: 'bold', color:'black' }}>Data Tanaman 4</Text>
+                            <Text style={{color:'black'}}>Diameter : {this.state.diameter4}</Text>
+                            <Text style={{color:'black'}}>Tinggi : {this.state.tinggi4}</Text>
                         </View>
                     </View>
                     <View>
-                        <Text style={{ fontWeight: 'bold', alignItems: 'flex-start' }}>Data Tanaman 5</Text>
-                        <Text>Diameter : {this.state.diameter5}</Text>
-                        <Text>Tinggi : {this.state.tinggi5}</Text>
+                        <Text style={{ fontWeight: 'bold', alignItems: 'flex-start', color:'black' }}>Data Tanaman 5</Text>
+                        <Text style={{color:'black'}}>Diameter : {this.state.diameter5}</Text>
+                        <Text style={{color:'black'}}>Tinggi : {this.state.tinggi5}</Text>
                     </View>
 
                 </View>
                 <View style={{ alignItems: 'center', marginTop: moderateScale(100) }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 15 }}>Rahmat Setiawan - 118140097</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 15, color:'black' }}>Rahmat Setiawan - 118140097</Text>
                 </View>
             </SafeAreaView>
         )

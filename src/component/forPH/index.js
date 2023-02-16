@@ -24,10 +24,10 @@ export default class ForPH extends Component {
     return (
         <SafeAreaView>
             <View style = {styles.kotak}>
-                <Text>{this.state.PH}</Text>
+                <Text style={{color:'black'}}>{this.state.PH}</Text>
             </View>
             <View style={{alignItems:'center', marginTop:moderateScale(300)}}>
-                <Text style={{fontWeight:'bold', fontSize:15}}>Rahmat Setiawan - 118140097</Text>
+                <Text style={{fontWeight:'bold', fontSize:15, color:'black'}}>Rahmat Setiawan - 118140097</Text>
             </View>
         </SafeAreaView>
       )
