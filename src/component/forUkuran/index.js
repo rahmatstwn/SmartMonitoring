@@ -8,6 +8,7 @@ export default class ForUkuran extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            suhu:0,
             diameter1: 0,
             diameter2: 0,
             diameter3: 0,
@@ -23,6 +24,7 @@ export default class ForUkuran extends Component {
     }
     async componentDidMount() {
         try {
+            await this.Suhu();
             await this.Tinggi1();
             await this.Tinggi2();
             await this.Tinggi3();
@@ -46,6 +48,18 @@ export default class ForUkuran extends Component {
             this.fungAHP();
         }
 
+    }
+
+    async Suhu() {
+
+        database()
+            .ref('/Hasil_Pembacaan/Temperature')
+            .on('value', snapshot => {
+
+                this.setState({
+                    suhu: snapshot.val()
+                })
+            });
     }
 
     async Tinggi1() {
@@ -171,6 +185,8 @@ export default class ForUkuran extends Component {
         let data = [];
         let i, j;
 
+        console.log(this.state.suhu)
+
         for (i = 0; i < jumlData; i++) {
             data[i] = [];
             for (j = 0; j < jumlKriteria; j++) {
@@ -185,7 +201,6 @@ export default class ForUkuran extends Component {
                 kuadratmatriks[i][j] = 0;
             }
         }
-        console.log(tanaman)
 
         data[0][0] = this.state.tinggi1;
         data[0][1] = this.state.diameter1;
@@ -211,6 +226,7 @@ export default class ForUkuran extends Component {
             }
         }
 
+        console.log("data")
         console.log(data);
         console.log("matriks perbandingan awal sebelum di input")
         console.log(matriksData);

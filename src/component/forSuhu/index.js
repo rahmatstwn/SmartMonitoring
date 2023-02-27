@@ -19,6 +19,8 @@ export default class ForSuhu extends Component {
             suhu : snapshot.val()
             })
         });
+
+        console.log(this.suhu);
     }
   render() {
     return (
