@@ -5,6 +5,7 @@ import Router from './src/config/router'
 import messaging from '@react-native-firebase/messaging';
 import { Alert, Text } from 'react-native';
 import NotifService from './NotificationService';
+import database from '@react-native-firebase/database';
 
 const App = () => {
   // async function requestUserPermission() {
@@ -21,7 +22,8 @@ const App = () => {
   //   const fcmToken = await messaging().getToken();
   //   console.log(fcmToken);
   // }
-
+  const [suhu, setSuhu] = useState();
+  const [ph, setPH] = useState();
   const [registerToken, setRegisterToken] = useState();
   const [fcmRegistered, setFcmRegistered] = useState(false);
   const onRegister = (token) => {
@@ -37,11 +39,24 @@ const App = () => {
     Alert.alert('Permission', JSON.stringify(perms));
   };
 
+  const Suhu = () =>  {
+    database()
+            .ref('/Hasil_Pembacaan/Temperature')
+            .on('value', snapshot => {
+
+             setSuhu(snapshot.val());
+            });
+  }
+
   useEffect (() => {
     // requestUserPermission();
     // getToken();
+    Suhu();
+    if(suhu < 22){
+        notif.localNotif();
+    }
+    // console.log(suhu);
     SplashScreen.hide();
-    notif.localNotif();
 
     // const unsubscribe = messaging().onMessage(async remoteMessage => {
     //   Alert.alert('A new FCM message arrived!', remoteMessage.notification?.body);
@@ -51,7 +66,11 @@ const App = () => {
   }, [])
   
   return (
+    
     <NavigationContainer>
+        <Text>
+            {suhu}
+        </Text>
       <Router />
       {registerToken && fcmRegistered}
     </NavigationContainer>
