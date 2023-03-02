@@ -1,6 +1,7 @@
 import PushNotification, {Importance} from 'react-native-push-notification';
 import NotificationHandler from './NotificationHandler';
 import { Component, useState } from 'react';
+import database from '@react-native-firebase/database'
 
 export default class NotifService extends Component{
   constructor(props) {
@@ -239,6 +240,7 @@ export default class NotifService extends Component{
   }
 
   localNotif(soundName) {
+    // console.log(this.state.suhu)
     this.lastId++;
     PushNotification.localNotification({
       /* Android Only Properties */
