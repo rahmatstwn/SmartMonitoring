@@ -15,7 +15,7 @@ export default class ForUkuran extends Component {
             diameter4: 0,
             diameter5: 0,
             tinggi1: 0,
-            tinggi2: 0,
+            tinggi2: 0, 
             tinggi3: 0,
             tinggi4: 0,
             tinggi5: 0,
