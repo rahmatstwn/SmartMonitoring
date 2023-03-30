@@ -206,6 +206,10 @@ const App = () => {
       notif.localNotifTDS();
       console.log(7)
     }
+
+    if(diameter1 >= 23 || tinggi1 >=17 || diameter2 >= 23 || tinggi2 >=17 || diameter3 >= 23 || tinggi3 >=17 || diameter4 >= 23 || tinggi4 >=17 || diameter5 >= 23 || tinggi5 >=17 ){
+      notif.localNotifPANEN()
+    }
     // console.log(suhu);
     SplashScreen.hide();
 

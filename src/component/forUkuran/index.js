@@ -8,7 +8,6 @@ export default class ForUkuran extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            suhu:0,
             diameter1: 0,
             diameter2: 0,
             diameter3: 0,
@@ -20,6 +19,7 @@ export default class ForUkuran extends Component {
             tinggi4: 0,
             tinggi5: 0,
             Umur: 30, //#hari
+            tanaman: []
         }
     }
     async componentDidMount() {
@@ -173,7 +173,7 @@ export default class ForUkuran extends Component {
             });
     }
 
-    fungAHP = () => {
+     fungAHP = () => {
         const jumlData = 5;
         const jumlKriteria = 3;
         let bSt = false;
@@ -185,7 +185,6 @@ export default class ForUkuran extends Component {
         let data = [];
         let i, j;
 
-        console.log(this.state.suhu)
 
         for (i = 0; i < jumlData; i++) {
             data[i] = [];
@@ -302,10 +301,10 @@ export default class ForUkuran extends Component {
             }
         }
 
-        const tanaman = [{ahp : ahp[0], nama : "Tanaman 1"}, {ahp : ahp[1], nama : "Tanaman 2" }, {ahp : ahp[2], nama : "Tanaman 3"}, {ahp : ahp[3], nama : "Tanaman 4"}, {ahp : ahp[4], nama : "Tanaman 5"}];
-        tanaman.sort((a,b) => b.ahp - a.ahp);
+        this.state.tanaman = [{ahp : ahp[0], nama : "Tanaman 1"}, {ahp : ahp[1], nama : "Tanaman 2" }, {ahp : ahp[2], nama : "Tanaman 3"}, {ahp : ahp[3], nama : "Tanaman 4"}, {ahp : ahp[4], nama : "Tanaman 5"}];
+        this.state.tanaman.sort((a,b) => b.ahp - a.ahp);
 
-        console.log(tanaman)
+        console.log(this.state.tanaman)
 
         // console.log("Hasil Akhir")
         // console.log("Tanaman 1" && ahp[0])
@@ -356,7 +355,10 @@ export default class ForUkuran extends Component {
                     </View>
 
                 </View>
-                <View style={{ alignItems: 'center', marginTop: moderateScale(100) }}>
+                <View style={styles.kotak2}>
+                    <Text style={{color:'#000000'}}>Tanaman Siap Panen : {this.state.tanaman}</Text>
+                </View>
+                <View style={{ alignItems: 'center', marginTop: moderateScale(80) }}>
                     <Text style={{ fontWeight: 'bold', fontSize: 15, color:'black' }}>Rahmat Setiawan - 118140097</Text>
                 </View>
             </SafeAreaView>
@@ -371,6 +373,18 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         width: 350,
         height: 400,
+        marginTop: 32,
+        marginBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    kotak2: {
+        marginTop: moderateScale(30),
+        backgroundColor: '#DEF1DF',
+        marginHorizontal: moderateScale(16),
+        borderRadius: 8,
+        width: 350,
+        height: 100,
         marginTop: 32,
         marginBottom: 8,
         justifyContent: 'center',
