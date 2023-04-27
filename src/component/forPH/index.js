@@ -25,6 +25,9 @@ export default class ForPH extends Component {
         <SafeAreaView>
             <View style = {styles.kotak}>
                 <Text style={{color:'black'}}>{this.state.PH}</Text>
+                {this.state.PH < 7 && <Text style={{color:'black'}}>Asam</Text>}
+                {this.state.PH == 7 && <Text style={{color:'black'}}>Netral</Text>}
+                {this.state.PH > 7 && <Text style={{color:'black'}}>Basa</Text>}
             </View>
             <View style={{alignItems:'center', marginTop:moderateScale(300)}}>
                 <Text style={{fontWeight:'bold', fontSize:15, color:'black'}}>Rahmat Setiawan - 118140097</Text>

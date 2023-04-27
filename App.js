@@ -196,7 +196,7 @@ const App = () => {
     }else if(ph > 7.0 && tds < 110){
       notif.localNotifpHTDS();
       console.log(4)
-    }else if(suhu > 22){
+    }else if(suhu > 25){
       notif.localNotifSUHU();
       console.log(5)
     }else if(ph > 7.0){
